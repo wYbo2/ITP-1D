@@ -25,9 +25,19 @@ SCI_FI_CITY = "sci fi city"
 ANCIENT_EGYPT = "ancient egypt" 
 THE_LOST_WORLD = "the lost world"
 FAR_FAR_AWAY = "far far away"
+MALE = "male"
+FEMALE = "female"
+UNDER_13 = "< 13 years old"
+OVER_13 = "> 13 years old"
+UNDER_100CM = "< 100cm"
+BETWEEN_100CM_TO_132CM = "100cm - 132cm"
+OVER_132CM = "> 132cm"
 
 
 ALL_CATEGORIES = [HOLLYWOOD, SCI_FI_CITY, ANCIENT_EGYPT, THE_LOST_WORLD, FAR_FAR_AWAY]
+GENDER = [MALE, FEMALE]
+AGE = [UNDER_13, OVER_13]
+HEIGHT = [UNDER_100CM, BETWEEN_100CM_TO_132CM, OVER_132CM]
 
 ATTRACTIONS = [ 
     { "name"    : "Lights, camera, action!", 
@@ -81,6 +91,17 @@ st.multiselect(
     key="user_selection" 
     )
 
+st.multiselect(
+    label="Select your age",
+    options=AGE,
+    key="user_age_selection"
+)
+
+st.multiselect(
+    label="Select your height",
+    options=HEIGHT,
+    key="user_height_selection"
+)
 ### Display user's choices as a debugging hint 
 ### This is stored in a datatype similar to a list
 st.write(st.session_state.user_selection)
