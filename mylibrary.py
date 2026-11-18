@@ -8,9 +8,11 @@
 ## See the project brief slides for hints. 
 ## ------------------------------------------------------------------------------------
 
+import random
+
 def get_recommendations(attractions_list, choices):
     out = []
-    out.append(attractions_list[0])
+    out.append(random.choice(attractions_list))
     return out
 
 ## Make It Yours ---------------------------------------------------------------------
