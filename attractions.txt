@@ -1,0 +1,11 @@
+# Format: name | categories | ages | heights | description
+# Separate multiple values inside categories, ages, or heights with a comma (,)
+
+Lights, camera, action! | hollywood | < 13 years old, > 13 years old | < 100cm, 100cm - 132cm, > 132cm | Experience your dreams as a reality in Hollywood!
+TRANSFORMERS: The Ride | sci fi city | < 13 years old, > 13 years old | 100cm - 132cm, > 132cm | Join the Autobots in the battle for the AllSpark!
+Battlestar Galactica | sci fi city | > 13 years old | 100cm - 132cm, > 132cm | The world's tallest dueling roller coasters featuring a fast seated track (Human) and an intense inverted track with inversions (Cylon).
+Revenge of the Mummy | ancient egypt | > 13 years old | 100cm - 132cm, > 132cm | A high-speed, pitch-black indoor roller coaster combined with a thrilling dark ride through ancient Egyptian tombs.
+Jurassic Park Rapids Adventure | the lost world | < 13 years old, > 13 years old | 100cm - 132cm, > 132cm | A roaring river-rafting water ride through dinosaur territory that ends with a sudden, splash-heavy drop.
+Waterworld | the lost world | < 13 years old, > 13 years old | < 100cm, 100cm - 132cm, > 132cm | Get splashed in this thrilling showcase in Waterworld!
+Donkey Live | far far away | < 13 years old, > 13 years old | < 100cm, 100cm - 132cm, > 132cm | Interact with Donkey in Shrek, but beware—he's very insensitive.
+Shrek 4D adventure | far far away | < 13 years old, > 13 years old | < 100cm, 100cm - 132cm, > 132cm | Immerse yourself in the world of Shrek in this 4D adventure!

@@ -1,6 +1,5 @@
-
+from pathlib import Path
 import streamlit as st
-
 ## The logic for the calculation is stored in functions in mylibrary.py 
 import mylibrary 
 
@@ -22,57 +21,31 @@ import mylibrary
 
 HOLLYWOOD = "hollywood"
 SCI_FI_CITY = "sci fi city"
-ANCIENT_EGYPT = "ancient egypt" 
+ANCIENT_EGYPT = "ancient egypt"
 THE_LOST_WORLD = "the lost world"
 FAR_FAR_AWAY = "far far away"
-MALE = "male"
-FEMALE = "female"
+
 UNDER_13 = "< 13 years old"
 OVER_13 = "> 13 years old"
+
 UNDER_100CM = "< 100cm"
 BETWEEN_100CM_TO_132CM = "100cm - 132cm"
 OVER_132CM = "> 132cm"
 
-
 ALL_CATEGORIES = [HOLLYWOOD, SCI_FI_CITY, ANCIENT_EGYPT, THE_LOST_WORLD, FAR_FAR_AWAY]
-GENDER = [MALE, FEMALE]
 AGE = [UNDER_13, OVER_13]
 HEIGHT = [UNDER_100CM, BETWEEN_100CM_TO_132CM, OVER_132CM]
 
-ATTRACTIONS = [ 
-    { "name"    : "Lights, camera, action!", 
-      "category": [ HOLLYWOOD ], 
-      "description" : "experience your dreams as a reality in hollywood!"
-    }, 
-    { "name"    : "TRANSFORMERS: The Ride", 
-      "category": [ SCI_FI_CITY ], 
-      "description" : "join the autobots in the battle for the allspark!"
-    }, 
-    { "name"    : "Battlestar Galactica", 
-      "category": [ SCI_FI_CITY ], 
-      "description" : "the world's tallest dueling roller coasters featuring a fast seated track (Human) and an intense inverted track with inversions (Cylon)."
-    }, 
-    { "name"    : "Revenge of the Mummy", 
-      "category": [ ANCIENT_EGYPT ], 
-      "description" : "a high-speed, pitch-black indoor roller coaster combined with a thrilling dark ride through ancient Egyptian tombs."
-    },
-    { "name"    : "Jurassic Park Rapids Adventure", 
-      "category": [ THE_LOST_WORLD ], 
-      "description" : "a roaring river-rafting water ride through dinosaur territory that ends with a sudden, splash-heavy drop."
-    },
-    { "name"    : "Waterworld", 
-      "category": [ THE_LOST_WORLD ], 
-      "description" : "get splashed in this thrilling showcase in waterworld!"
-    },
-    { "name"    : "Donkey Live", 
-      "category": [ FAR_FAR_AWAY ], 
-      "description" : "interact with donkey in shrek, but beware, hes very insensitive"
-    },
-    { "name"    : "Shrek 4D adventure", 
-      "category": [ FAR_FAR_AWAY ], 
-      "description" : "immerse yourself in the world of shrek in this 4D adventure!"
-    },   
-]
+DATA_FILE = Path(__file__).parent / "attractions.txt"
+
+try:
+    ATTRACTIONS = mylibrary.load_attractions(DATA_FILE)
+except FileNotFoundError:
+    st.error(f"Could not find `{DATA_FILE.name}`. Make sure it is in the same folder as `myapp.py`.")
+    ATTRACTIONS = []
+except ValueError as err:
+    st.error(f"Formatting error in `{DATA_FILE.name}`: {err}")
+    ATTRACTIONS = []
 
 
 ## Data Entry -------------------------------------------------------------------------
