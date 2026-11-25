@@ -13,7 +13,7 @@ import random
 
 def load_attractions(filepath):
     attractions = []
-    with open(filepath, 'r', encoding1  ='utf-8') as file:
+    with open(filepath, 'r', encoding  ='utf-8') as file:
         for line_num, raw_line in enumerate(file, start=1):
             line = raw_line.strip()
             
