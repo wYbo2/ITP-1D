@@ -8,17 +8,63 @@
 ## See the project brief slides for hints. 
 ## ------------------------------------------------------------------------------------
 
-def get_recommendations(attractions_list, choices):
-    # if the user did not select any category, recommend everything
-    if len(choices) == 0:
-        return attractions_list
+## read_attractions:
+## Reads the attractions from a text file and returns a list of dictionaries.
+## Each line in the file looks like:
+##   name | categories | ages | heights | description
+## categories, ages and heights can have more than one value, separated by a comma.
+def read_attractions(filename):
+    attractions = []
+    file = open(filename, "r", encoding="utf-8")
+    for line in file:
+        line = line.strip()
 
+        # skip empty lines and comment lines starting with #
+        if line == "" or line.startswith("#"):
+            continue
+
+        parts = line.split("|")
+        attraction = {
+            "name"       : parts[0].strip(),
+            "category"   : split_values(parts[1]),
+            "age"        : split_values(parts[2]),
+            "height"     : split_values(parts[3]),
+            "description": parts[4].strip()
+        }
+        attractions.append(attraction)
+    file.close()
+    return attractions
+
+## split_values:
+## Turns text like "< 13 years old, > 13 years old" into ["< 13 years old", "> 13 years old"]
+def split_values(text):
+    values = []
+    for value in text.split(","):
+        values.append(value.strip())
+    return values
+
+
+## matches:
+## Returns True if at least one of the attraction's values is in the user's selection.
+## If the user selected nothing, it returns True (no filter for that question).
+def matches(attraction_values, selected):
+    if len(selected) == 0:
+        return True
+    for value in attraction_values:
+        if value in selected:
+            return True
+    return False
+
+
+## get_recommendations:
+## An attraction is recommended only if it matches the category, age AND height selections.
+def get_recommendations(attractions_list, choices, ages, heights):
     out = []
     for attraction in attractions_list:
-        for category in attraction["category"]:
-            if category in choices:
-                out.append(attraction)
-                break  # stop checking, so the same attraction isn't added twice
+        if (matches(attraction["category"], choices)
+                and matches(attraction["age"], ages)
+                and matches(attraction["height"], heights)):
+            out.append(attraction)
     return out
 
 ## Make It Yours ---------------------------------------------------------------------

@@ -39,40 +39,7 @@ GENDER = [MALE, FEMALE]
 AGE = [UNDER_13, OVER_13]
 HEIGHT = [UNDER_100CM, BETWEEN_100CM_TO_132CM, OVER_132CM]
 
-ATTRACTIONS = [ 
-    { "name"    : "Lights, camera, action!", 
-      "category": [ HOLLYWOOD ], 
-      "description" : "experience your dreams as a reality in hollywood!"
-    }, 
-    { "name"    : "TRANSFORMERS: The Ride", 
-      "category": [ SCI_FI_CITY ], 
-      "description" : "join the autobots in the battle for the allspark!"
-    }, 
-    { "name"    : "Battlestar Galactica", 
-      "category": [ SCI_FI_CITY ], 
-      "description" : "the world's tallest dueling roller coasters featuring a fast seated track (Human) and an intense inverted track with inversions (Cylon)."
-    }, 
-    { "name"    : "Revenge of the Mummy", 
-      "category": [ ANCIENT_EGYPT ], 
-      "description" : "a high-speed, pitch-black indoor roller coaster combined with a thrilling dark ride through ancient Egyptian tombs."
-    },
-    { "name"    : "Jurassic Park Rapids Adventure", 
-      "category": [ THE_LOST_WORLD ], 
-      "description" : "a roaring river-rafting water ride through dinosaur territory that ends with a sudden, splash-heavy drop."
-    },
-    { "name"    : "Waterworld", 
-      "category": [ THE_LOST_WORLD ], 
-      "description" : "get splashed in this thrilling showcase in waterworld!"
-    },
-    { "name"    : "Donkey Live", 
-      "category": [ FAR_FAR_AWAY ], 
-      "description" : "interact with donkey in shrek, but beware, hes very insensitive"
-    },
-    { "name"    : "Shrek 4D adventure", 
-      "category": [ FAR_FAR_AWAY ], 
-      "description" : "immerse yourself in the world of shrek in this 4D adventure!"
-    },   
-]
+ATTRACTIONS = mylibrary.read_attractions("attractions.txt")
 
 
 ## Data Entry -------------------------------------------------------------------------
@@ -120,8 +87,10 @@ def reset_choices():
 ## ------------------------------------------------------------------------------------ 
 
 if st.button("Get me recommendations"):
-    options = list( st.session_state.user_selection )  
-    recs = mylibrary.get_recommendations(ATTRACTIONS, options)
+    options = list( st.session_state.user_selection )
+    ages = list( st.session_state.user_age_selection )
+    heights = list( st.session_state.user_height_selection )
+    recs = mylibrary.get_recommendations(ATTRACTIONS, options, ages, heights)
     st.table(recs)
 
 st.button("Reset Selections", on_click=reset_choices)
