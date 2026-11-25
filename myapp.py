@@ -105,10 +105,14 @@ st.multiselect(
 ### Display user's choices as a debugging hint 
 ### This is stored in a datatype similar to a list
 st.write(st.session_state.user_selection)
+st.write(st.session_state.user_age_selection)
+st.write(st.session_state.user_height_selection)
 
 ### Define a function to clear the user's choices
 def reset_choices():
     st.session_state.user_selection = []
+    st.session_state.user_age_selection = []
+    st.session_state.user_height_selection = []
 
 ## Calculation -------------------------------------------------------------------------
 ## Shows you the code to 
@@ -120,7 +124,7 @@ def reset_choices():
 ## ------------------------------------------------------------------------------------ 
 
 if st.button("Get me recommendations"):
-    options = list( st.session_state.user_selection )  
+    options = list( st.session_state.user_selection ) 
     recs = mylibrary.get_recommendations(ATTRACTIONS, options)
     st.table(recs)
 
