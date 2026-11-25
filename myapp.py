@@ -94,3 +94,50 @@ if st.button("Get me recommendations"):
     st.table(recs)
 
 st.button("Reset Selections", on_click=reset_choices)
+
+
+## Booking System ---------------------------------------------------------------------
+## Lets the user book tickets and shows the final price.
+## ------------------------------------------------------------------------------------
+
+st.header("Book your tickets")
+
+st.text_input("Name", key="booking_name")
+
+col1, col2 = st.columns([1, 3])
+with col1:
+    st.text_input("Country code", placeholder="+65", key="booking_country_code")
+with col2:
+    st.text_input("Phone number", placeholder="91234567", key="booking_phone")
+
+st.date_input("Date of visit", key="booking_date")
+
+st.number_input(f"Adults (${mylibrary.ADULT_PRICE} each)", min_value=1, step=1, key="booking_adults")
+st.number_input(f"Children (${mylibrary.CHILD_PRICE} each)", min_value=0, step=1, key="booking_children")
+
+total = mylibrary.calculate_price(st.session_state.booking_adults, st.session_state.booking_children)
+st.subheader(f"Total price: ${total}")
+
+if st.button("Book"):
+    name = st.session_state.booking_name.strip()
+    country_code = st.session_state.booking_country_code.strip()
+    phone = st.session_state.booking_phone.strip()
+
+    if name == "":
+        st.error("Please enter your name.")
+    elif not mylibrary.is_valid_phone(country_code, phone):
+        st.error("Please enter a valid phone number. The country code must start with + (e.g. +65), "
+                 "and the country code and number together must have more than 7 digits.")
+    else:
+        full_phone = country_code + " " + phone
+        mylibrary.save_booking("bookings.txt", name, full_phone, st.session_state.booking_date,
+                               st.session_state.booking_adults, st.session_state.booking_children, total)
+        st.success("Booking confirmed!")
+        st.table({
+            "Name": [name],
+            "Phone": [full_phone],
+            "Date": [str(st.session_state.booking_date)],
+            "Adults": [st.session_state.booking_adults],
+            "Children": [st.session_state.booking_children],
+            "Total price": [f"${total}"],
+        })

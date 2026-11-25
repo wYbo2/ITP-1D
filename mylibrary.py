@@ -71,3 +71,37 @@ def get_recommendations(attractions_list, choices, ages, heights):
 ## You are now ready to design your own attractions with their own categories
 ## And modify the code so that the web application works according to your design. 
 ## ------------------------------------------------------------------------------------
+
+## Booking System ---------------------------------------------------------------------
+## Functions used by the booking form in myapp.py
+## ------------------------------------------------------------------------------------
+
+ADULT_PRICE = 83
+CHILD_PRICE = 62
+
+## calculate_price:
+## Returns the total price for the number of adults and children.
+def calculate_price(adults, children):
+    return adults * ADULT_PRICE + children * CHILD_PRICE
+
+
+## is_valid_phone:
+## The country code must start with "+" followed by digits, e.g. "+65".
+## The phone number must contain only digits.
+## Country code digits + phone digits together must be MORE than 7.
+def is_valid_phone(country_code, phone):
+    if not country_code.startswith("+"):
+        return False
+    code_digits = country_code[1:]
+    if not code_digits.isdigit() or not phone.isdigit():
+        return False
+    return len(code_digits) + len(phone) > 7
+
+
+## save_booking:
+## Adds one booking as a line to the file, in the format:
+##   name | phone | date | adults | children | total price
+def save_booking(filename, name, phone, date, adults, children, total):
+    file = open(filename, "a", encoding="utf-8")
+    file.write(f"{name} | {phone} | {date} | {adults} | {children} | {total}\n")
+    file.close()
