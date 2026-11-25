@@ -8,11 +8,17 @@
 ## See the project brief slides for hints. 
 ## ------------------------------------------------------------------------------------
 
-import random
-
 def get_recommendations(attractions_list, choices):
+    # if the user did not select any category, recommend everything
+    if len(choices) == 0:
+        return attractions_list
+
     out = []
-    out.append(random.choice(attractions_list))
+    for attraction in attractions_list:
+        for category in attraction["category"]:
+            if category in choices:
+                out.append(attraction)
+                break  # stop checking, so the same attraction isn't added twice
     return out
 
 ## Make It Yours ---------------------------------------------------------------------
